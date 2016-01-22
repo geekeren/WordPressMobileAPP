@@ -1,0 +1,23 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="app_bar_height">150dp</dimen>
+    <dimen name="usercenter_app_bar_height">200dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="nav_header_user_name">18dp</dimen>
+    <dimen name="list_item_title">16dp</dimen>
+    <dimen name="nav_header_user_email">14dp</dimen>
+    <dimen name="listitempostInfo">13dp</dimen>
+    <dimen name="list_item_summary">14dp</dimen>
+    <dimen name="list_text_margin_top">6dp</dimen>
+    <dimen name="list_text_margin_left">5dp</dimen>
+    <dimen name="post_itms_list_thumb_spacing">8dp</dimen>
+    <dimen name="ico_left">2dp</dimen>
+    <dimen name="ico_right">8dp</dimen>
+</resources>

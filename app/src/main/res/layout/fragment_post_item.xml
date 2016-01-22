@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_marginTop="1dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="王柏元的博客"-->
+            <!--android:id="@+id/textView2"-->
+            <!--android:layout_gravity="center_vertical|right"-->
+            <!--android:gravity="center_vertical|right"-->
+            <!--android:textSize="@dimen/list_item_title"-->
+            <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
+            <!--android:maxLines="1"-->
+            <!--android:background="#a2beec" />-->
+
+        <TextView android:id="@+id/title"
+            android:ellipsize = "end"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:paddingTop="@dimen/list_text_margin_top"
+            android:paddingLeft="@dimen/list_text_margin_left"
+            android:text="@string/list_title_loading"
+            android:textSize="@dimen/list_item_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:padding="5dp">
+
+        <ImageView android:layout_width="120dp"
+            android:layout_gravity="center_vertical"
+            android:layout_height="90dp"
+            android:src="@mipmap/post_itemslist_thumb"
+            android:layout_marginRight="@dimen/post_itms_list_thumb_spacing" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/text_post_info"
+                android:orientation="horizontal"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/list_ico_user"
+                    android:ellipsize="end"
+                    android:textColor="@color/listitempostInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/listitempostInfo"
+                    android:text="@string/fa_user"
+                    android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/text_listitem_post_author"
+                    android:ellipsize="end"
+                    android:textColor="@color/listitempostInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/listitempostInfo"
+                    android:text="00:00"
+                    android:maxLines="1"
+                    android:layout_marginLeft="@dimen/ico_left"
+                    android:layout_marginRight="@dimen/ico_right" />
+
+                <TextView
+                    android:id="@+id/list_ico_date"
+                    android:ellipsize="end"
+                    android:textColor="@color/listitempostInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/listitempostInfo"
+                    android:text="@string/fa_calendar"
+                    android:maxLines="1" />
+                <TextView
+                    android:id="@+id/text_listitem_post_date"
+                    android:ellipsize="end"
+                    android:textColor="@color/listitempostInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/listitempostInfo"
+
+                    android:text="00:00"
+                    android:maxLines="1"
+                    android:layout_marginLeft="@dimen/ico_left"
+                    android:layout_marginRight="@dimen/ico_right" />
+
+                <TextView
+                    android:id="@+id/list_ico_comment"
+                    android:ellipsize="end"
+                    android:textColor="@color/listitempostInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/listitempostInfo"
+                    android:text="@string/fa_comments"
+                    android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/text_listItem_post_comment_count"
+                    android:ellipsize="end"
+                    android:textColor="@color/listitempostInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/listitempostInfo"
+                    android:text="0"
+                    android:maxLines="1"
+                    android:layout_marginLeft="@dimen/ico_left"
+                    android:layout_marginRight="@dimen/ico_right" />
+
+                <TextView
+                    android:id="@+id/list_ico_visit"
+                    android:ellipsize="end"
+                    android:textColor="@color/listitempostInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/listitempostInfo"
+                    android:text="@string/fa_eye"
+                    android:maxLines="1" />
+                <TextView
+                    android:id="@+id/text_listitem_post_visit_count"
+                    android:ellipsize="end"
+                    android:textColor="@color/listitempostInfo"
+                    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/listitempostInfo"
+                android:text="0"
+                android:maxLines="1"
+                android:layout_marginLeft="@dimen/ico_left"
+                    android:layout_marginRight="@dimen/ico_right" />
+
+            </LinearLayout>
+
+            <TextView android:id="@+id/summary"
+                android:ellipsize = "end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/list_item_summary"
+                android:text="@string/list_item_summary"
+                android:layout_marginTop="2dp"
+                android:maxLines="4" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+    </LinearLayout>
+</LinearLayout>

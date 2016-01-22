@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <!--<item-->
+            <!--android:id="@+id/nav_home"-->
+            <!--android:icon="@mipmap/ic_drawer_explore_normal"-->
+            <!--android:title="home" />-->
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@mipmap/ic_drawer_explore_normal"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_itindustry"
+            android:icon="@drawable/ic_menu_category"
+            android:title="@string/menu_it_industry" />
+        <item
+            android:id="@+id/nav_technology"
+            android:icon="@drawable/ic_menu_category"
+            android:title="@string/menu_technology" />
+        <item
+            android:id="@+id/nav_geek_views"
+            android:icon="@drawable/ic_menu_category"
+            android:title="@string/menu_geek_views" />
+        <item
+            android:id="@+id/nav_shuoshuo"
+            android:icon="@drawable/ic_menu_category"
+            android:title="@string/menu_shuoshuo" />
+    </group>
+
+    <item android:title="@string/menu_usercenter">
+        <menu>
+            <item
+                android:id="@+id/nav_collect"
+                android:icon="@drawable/ic_menu_collect"
+                android:title="@string/menu_collect" />
+            <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/ic_menu_history"
+            android:title="@string/menu_history" />
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_menu_setting"
+                android:title="@string/action_settings" />
+
+        </menu>
+    </item>
+
+</menu>
