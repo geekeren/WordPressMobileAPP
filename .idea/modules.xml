@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BYBolg-open.iml" filepath="$PROJECT_DIR$/BYBolg-open.iml" />
-      <module fileurl="file://$PROJECT_DIR$/BYBolg-open.iml" filepath="$PROJECT_DIR$/BYBolg-open.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/RNBlog.iml" filepath="$PROJECT_DIR$/.idea/RNBlog.iml" />
     </modules>
   </component>
 </project>

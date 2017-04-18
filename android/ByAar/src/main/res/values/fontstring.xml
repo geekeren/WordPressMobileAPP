@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="icon_chuang">&#xe600;</string>
+    <string name="icon_more">&#xe601;</string>
+    <string name="icon_dianying">&#xe602;</string>
+    <string name="icon_yonghu">&#xe603;</string>
+    <string name="icon_radio">&#xe604;</string>
+    <string name="icon_zhibo">&#xe605;</string>
+    <string name="icon_canting">&#xe606;</string>
+    <string name="icon_game">&#xe607;</string>
+    <string name="icon_shop">&#xe608;</string>
+    <string name="icon_train">&#xe609;</string>
+    <string name="icon_user">&#xe60a;</string>
+    <string name="icon_idcard">&#xe60b;</string>
+    <string name="icon_note">&#xe60c;</string>
+    <string name="icon_send_img">&#xe60d;</string>
+    <string name="icon_send_voice">&#xe60e;</string>
+    <string name="icon_send_changeseat">&#xe60f;</string>
+    <string name="icon_send_currentseat">&#xe611;</string>
+    <string name="icon_send_biaoqing">&#xe610;</string>
+    <string name="icon_send_seat">&#xe613;</string>
+
+</resources>

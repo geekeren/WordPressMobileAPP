@@ -1,0 +1,188 @@
+请求单篇文章：
+{"id":1262,"date":"2015-06-07T21:26:00","date_gmt":"2015-06-07T13:26:00","guid":{"rendered":"http:\/\/wangbaiyuan.cn\/?p=1262"},"modified":"2015-12-26T12:09:02","modified_gmt":"2015-12-26T04:09:02","slug":"ssd8-ex3-java-rmi-services-1-an-overview-of-rmi-and-web-api","type":"post","link":"http:\/\/wangbaiyuan.cn\/ssd8-ex3-java-rmi-services-1-an-overview-of-rmi-and-web-api.html","title":{"rendered":"SSD8_Ex3\u3010JAVA_RMI\u670d\u52a1\u3011(1)\u6982\u8ff0RMI\u548c\u7f51\u7edcAPI"},"content":{"rendered":"<h2>RMI\u548c\u7f51\u7edcAPI<\/h2>\n<p>\u5468\u672b\u505a\u4e86\u7f51\u7edc\u4e0e<a href=\"http:\/\/wangbaiyuan.cn\/tag\/distributed-system\" class=\"tooltip-trigger tin\" title=\"\u67e5\u770b\u66f4\u591a\u5173\u4e8e \u5206\u5e03\u5f0f\u7cfb\u7edf \u7684\u6587\u7ae0\" target=\"_blank\">\u5206\u5e03\u5f0f\u7cfb\u7edf<\/a>\u5b9e\u9a8c\u7684EX3-java\u5b9e\u73b0RMI\u5206\u5e03\u5f0f\u8bae\u7a0b\u670d\u52a1\u3002RMI\u7684\u5168\u79f0\u662f\u201c\u8fdc\u7a0b\u65b9\u6cd5\u8c03\u7528 (Remote Method Invocation)\u201d\u3002\u4e0b\u9762\u662f\u6781\u5ba2\u4eba\u7684\u7406\u89e3\uff1a\u4f7f\u7528RMI\u8fdc\u7a0b\u65b9\u6cd5\u8c03\u7528\uff0c\u53ef\u4ee5\u5b9e\u73b0\u4e00\u4e2ajava\u5ba2\u6237\u7aef\u5bf9java RMI\u7684\u670d\u52a1\u7aef\u8fdb\u884c\u8fdc\u7a0b\u8c03\u7528\u5bf9\u65b9\u7684\u65b9\u6cd5\uff0c\u8fd9\u4e9b\u65b9\u6cd5\u5728\u670d\u52a1\u5668\u7aef\u8fdb\u884c\u4e86\u58f0\u660e\u5e76\u5177\u4f53\u5b9e\u73b0\uff0c\u800c\u5ba2\u6237\u7aef\u4e2d\u53ea\u6709\u8fd9\u4e9b\u65b9\u6cd5\u7684\u5b9a\u4e49\u800c\u6ca1\u6709\u65b9\u6cd5\u7684\u5185\u5bb9\u5b9e\u73b0\u2014\u2014\u5373\u4e00\u4e2a<a href=\"http:\/\/wangbaiyuan.cn\/tag\/java\" class=\"tooltip-trigger tin\" title=\"\u67e5\u770b\u66f4\u591a\u5173\u4e8e JAVA \u7684\u6587\u7ae0\" target=\"_blank\">JAVA<\/a>\u63a5\u53e3\u3002\u6ca1\u6709\u8fd9\u4e9b\u65b9\u6cd5\u5b9e\u73b0\u7684<a href=\"http:\/\/wangbaiyuan.cn\/tag\/java\" class=\"tooltip-trigger tin\" title=\"\u67e5\u770b\u66f4\u591a\u5173\u4e8e JAVA \u7684\u6587\u7ae0\" target=\"_blank\">JAVA<\/a>\u5ba2\u6237\u7aef\u53ef\u4ee5\u901a\u8fc7\u7f51\u7edc\u8fde\u63a5\u83b7\u53d6\u8fdc\u7a0b\u670d\u52a1\u5668\u7aef\u7684\u5bf9\u8c61\uff0c\u7136\u540e\u5bf9\u8fdc\u7a0b\u5bf9\u8c61\u548c\u65b9\u6cd5\u8fdb\u884c\u8c03\u7528\u548c\u64cd\u4f5c\u3002\u4e5f\u5c31\u662f\u8bf4\u5ba2\u6237\u7aef\u7684\u65b9\u6cd5\u5b9a\u4e49\u5728\u672c\u5730\uff0c\u800c\u5177\u4f53\u5b9e\u73b0\u5374\u5728\u901a\u8fc7\u7f51\u7edc\u8fde\u63a5\u7684\"\u9065\u8fdc\"\u7684\u670d\u52a1\u5668\u4e0a<\/p>\n<p>\u5c31\u6781\u5ba2\u4eba\u76ee\u524d\u4e2a\u4eba\u7684\u7406\u89e3\uff0c<a href=\"http:\/\/wangbaiyuan.cn\/tag\/java\" class=\"tooltip-trigger tin\" title=\"\u67e5\u770b\u66f4\u591a\u5173\u4e8e JAVA \u7684\u6587\u7ae0\" target=\"_blank\">JAVA<\/a> RMI\u9664\u4e86\u4e3a\u5ba2\u6237\u7aef\u7701\u53bb\u8bb8\u591a\u4ee3\u7801\uff0c\u5176\u5b9e\u8fd8\u53ef\u4ee5\u4e3a\u670d\u52a1\u5668\u7aef\u7684\u6570\u636e\u5f00\u653e\u63d0\u4f9b\u53e6\u5916\u4e00\u79cd\u6709\u8fde\u63a5\u7684\u67e5\u8be2\u63a5\u53e3\uff0c\u6bd4\u5982\u73b0\u5728\u7f51\u7edc\u4e0a\u8bb8\u591aAPI\u670d\u52a1\uff0c\u90fd\u662fPHP+JSON\u7684\u5f62\u5f0f\uff0c\u901a\u8fc7URL\u7684\u8bf7\u6c42\uff0c\u670d\u52a1\u5668\u7aef\u67e5\u8be2\u76f8\u5173\u7ed3\u679c\u540e\u4ee5JSON\u6570\u636e\u5305\u7684\u5f62\u5f0f\u5411\u5ba2\u6237\u7aef\u8fd4\u56de\u3002\u8fd9\u6837\u7684\u6570\u636e\u67e5\u8be2\u65b9\u5f0f\u73b0\u5728\u975e\u5e38\u666e\u904d\uff0c\u5c24\u5176\u662f\u5fae\u4fe1\u8d8a\u6765\u8d8a\u6d41\u884c\u7684\u5f53\u4e0b\uff0c\u8bb8\u591a\u516c\u4f17\u53f7\u90fd\u5728\u91c7\u7528\u901a\u8fc7\u5bf9\u7b2c\u4e09\u65b9API\u8fd4\u56deJSON\u6570\u636e\u5305\u8fdb\u884c\u89e3\u6790\uff0c\u4e3a\u7528\u6237\u63d0\u4f9b\u5929\u6c14\u67e5\u8be2\u3001\u8f66\u7968\u67e5\u8be2\u3001\u673a\u5668\u4eba\u804a\u5929\u3001IP\u67e5\u8be2\u3001\u5f52\u5c5e\u5730\u67e5\u8be2\u7b49\u670d\u52a1\u3002<\/p>\n<p>\u867d\u7136RMI\u548cJSON-\u7f51\u7edcAPI\u4e0d\u4e00\u6837\uff0c\u4f46\u662f\u6781\u5ba2\u4eba\u5b66\u5230RMI\u5c31\u4e0d\u7531\u81ea\u4e3b\u60f3\u5230\u4e86JSON\u7684\u7f51\u7edcAPI\u3002\u4e0d\u8fc7\u4e24\u8005\u7684\u4e0d\u540c\u4e5f\u663e\u800c\u6613\u89c1\uff0c\u7f51\u7edc\u4e0a\u7684JSON-API\u90fd\u662f\u88ab\u52a8\u63a5\u53d7\u7684\uff0c\u5ba2\u6237\u7aef\u53ea\u80fd\u5411\u670d\u52a1\u5668\u8bf7\u6c42\u6570\u636e\u540e\u670d\u52a1\u5668\u8fd4\u56de\uff0c\u800cRMI\u7684\u5ba2\u6237\u7aef\u7684\u6743\u9650\u66f4\u5927\uff0c\u53ea\u8981RMI\u7684\u63a5\u53e3\u5728\u670d\u52a1\u5668\u7aef\u6709\u5b9a\u4e49\uff0c\u5ba2\u6237\u7aef\u53ef\u4ee5\u4e3b\u52a8\u5bf9\u670d\u52a1\u5668\u8fdb\u884c\u64cd\u4f5c\uff0c\u6bd4\u5982<a href=\"http:\/\/wangbaiyuan.cn\/tag\/the-database\" class=\"tooltip-trigger tin\" title=\"\u67e5\u770b\u66f4\u591a\u5173\u4e8e \u6570\u636e\u5e93 \u7684\u6587\u7ae0\" target=\"_blank\">\u6570\u636e\u5e93<\/a>\u64cd\u4f5c\uff1a\u67e5\u8be2<a href=\"http:\/\/wangbaiyuan.cn\/tag\/the-database\" class=\"tooltip-trigger tin\" title=\"\u67e5\u770b\u66f4\u591a\u5173\u4e8e \u6570\u636e\u5e93 \u7684\u6587\u7ae0\" target=\"_blank\">\u6570\u636e\u5e93<\/a>\uff0c\u5220\u9664<a href=\"http:\/\/wangbaiyuan.cn\/tag\/the-database\" class=\"tooltip-trigger tin\" title=\"\u67e5\u770b\u66f4\u591a\u5173\u4e8e \u6570\u636e\u5e93 \u7684\u6587\u7ae0\" target=\"_blank\">\u6570\u636e\u5e93<\/a>\u8bb0\u5f55\uff1b\u8fd0\u884c\u547d\u4ee4:\u5bf9\u670d\u52a1\u5668\u8fdb\u884c\u5173\u673a\uff08\u4e00\u4e2a\u5b9e\u884c\u8fdc\u7a0b\u5173\u673a\u7684\u4ee3\u7801\u6781\u5ba2\u4eba\u5c06\u5728\u672c\u7cfb\u5217\u6587\u7ae0\u7684\u6700\u540e\u7ed9\u51fa\uff09\uff0c\u4e00\u822c\u8bf4\u6765\uff0cjava\u670d\u52a1\u5668\u7aef\u7a0b\u5e8f\u5728\u672c\u5730\u80fd\u505a\u5230\u7684\u4e00\u5207\uff0c\u90fd\u53ef\u4ee5\u901a\u8fc7RMI\u7684\u65b9\u5f0f\u6388\u6743\u7ed9\u5ba2\u6237\u7aef\u3002<\/p>\n<p>\u672c\u7cfb\u5217\u6587\u7ae0\u4e3b\u8981\u662f\u901a\u8fc7JAVA RMI\u5b9e\u73b0\u8fdc\u7a0b\u4f1a\u8bae\u7ba1\u7406\u3002\u5206\u4eab\u672c\u6b21\u7ec3\u4e60\u7684\u7b54\u6848\u4e0d\u662f\u76ee\u7684\uff0c\u76ee\u7684\u662f\u5728\u6b64\u68b3\u7406\u4e00\u4e0b\u8fd9\u4e24\u5929\u7684\u7ecf\u9a8c\u65b9\u6cd5\u3002<\/p>\n<h2><a href=\"http:\/\/wangbaiyuan.cn\/tag\/ssd8\" class=\"tooltip-trigger tin\" title=\"\u67e5\u770b\u66f4\u591a\u5173\u4e8e SSD8 \u7684\u6587\u7ae0\" target=\"_blank\">SSD8<\/a>_EX3\u95ee\u9898\u6982\u8ff0\uff1a<\/h2>\n<p>&nbsp;<\/p>\n<p>\u8fd9\u662f<a href=\"http:\/\/wangbaiyuan.cn\/tag\/ssd8\">SSD8<\/a>\u7ec3\u4e60\u7684Ex3\uff0c\u9884\u8ba1\u6781\u5ba2\u4eba\u5c06\u4f1a\u5199\u4e00\u4e2a\u7cfb\u5217\uff0c\u66f4\u65b0\u9891\u7387\u4f1a\u548cNWPU\u7f51\u7edc\u4e0e<a href=\"http:\/\/wangbaiyuan.cn\/tag\/distributed-system\" class=\"tooltip-trigger tin\" title=\"\u67e5\u770b\u66f4\u591a\u5173\u4e8e \u5206\u5e03\u5f0f\u7cfb\u7edf \u7684\u6587\u7ae0\" target=\"_blank\">\u5206\u5e03\u5f0f\u7cfb\u7edf<\/a>\u5b9e\u9a8c\u8bfe2013\u7ea7\u8fdb\u5ea6\u540c\u6b65\u3002\u70b9\u51fb\u6807\u7b7e\u6216\u5728\u672c\u7ad9\u641c\u7d22\u201c<a href=\"http:\/\/wangbaiyuan.cn\/tag\/ssd8\">SSD8<\/a>\u201d\u5373\u53ef\u83b7\u53d6\u5df2\u66f4\u65b0\u7684<a href=\"http:\/\/wangbaiyuan.cn\/tag\/ssd8\">SSD8<\/a>\u7b54\u6848\u3002\u4e0a\u4e00\u7ec3\u4e60\uff1a<a href=\"http:\/\/wangbaiyuan.cn\/ssd8-exam1%E3%80%90tcp-chat-server%E3%80%91.html\" target=\"_blank\">SSD8_Exam1\u3010TCP Chat Server\u3011;<\/a>\u5982\u679c\u4f60\u60f3\u7ee7\u7eed\u8ddf\u8e2aSSD\u7ec3\u4e60\u8fdb\u5c55\uff0c\u5efa\u8bae<a href=\"http:\/\/wangbaiyuan.cn\/newsletter?action=subscribe\">\u8ba2\u9605\u672c\u7ad9<\/a>\u3002<\/p>\n<p>1) \u4f7f\u7528Java RMI\u521b\u5efa\u4e00\u4e2a\u5206\u5e03\u5f0f\u8bae\u7a0b\u5171\u4eab\u670d\u52a1\u3002\u4e0d\u540c\u7684\u7528\u6237\u53ef\u4ee5\u4f7f\u7528\u8fd9\u4e2a\u5171\u4eab\u8bae\u7a0b\u670d\u52a1\u6267\u884c\u67e5\u8be2\u3001\u6dfb\u52a0\u548c\u5220\u9664\u4f1a\u8bae\u7684\u64cd\u4f5c\u3002\u670d\u52a1\u5668\u652f\u6301\u4f1a\u8bae\u7684\u767b\u8bb0\u548c\u6e05\u9664\u7b49\u529f\u80fd\uff1b<\/p>\n<p>2) \u8bae\u7a0b\u5171\u4eab\u670d\u52a1\u5305\u62ec\u4ee5\u4e0b\u529f\u80fd\uff1a\u7528\u6237\u6ce8\u518c\u3001\u6dfb\u52a0\u4f1a\u8bae\u3001\u67e5\u8be2\u4f1a\u8bae\u3001\u5220\u9664\u4f1a\u8bae\u3001\u6e05\u9664\u4f1a\u8bae\uff1b<\/p>\n<p>\u76f8\u5173\u4ee3\u7801\u548c\u5206\u6790\u5c06\u5728\u540e\u7eed\u6587\u7ae0\u4e2d\u7ed9\u51fa\u3002<\/p>\n<h2>\u7cfb\u5217\u6587\u7ae0\u94fe\u63a5\uff1a<\/h2>\n<p style=\"text-align: left;\"><a href=\"http:\/\/wangbaiyuan.cn\/ssd8-ex3-java-rmi-services-1-an-overview-of-rmi-and-web-api.html\" target=\"_blank\">SSD8_Ex3\u3010JAVA_RMI\u670d\u52a1\u3011(1)\u6982\u8ff0RMI\u548c\u7f51\u7edcAPI<\/a><\/p>\n<p style=\"text-align: left;\"><a href=\"http:\/\/wangbaiyuan.cn\/ssd8-ex3-java-rmi-2-remote-interface-declarations.html\" target=\"_blank\">SSD8_Ex3\u3010JAVA_RMI\u3011(2)\u8fdc\u7a0b\u63a5\u53e3\u58f0\u660e<\/a><\/p>\n<p style=\"text-align: left;\"><a href=\"http:\/\/wangbaiyuan.cn\/ssd8-ex3-java-rmi-3-open-the-rmi-service.html\" target=\"_blank\">SSD8_Ex3\u3010JAVA_RMI\u3011(3)\u5f00\u542fRMI\u670d\u52a1<\/a><\/p>\n<p style=\"text-align: left;\"><a href=\"http:\/\/wangbaiyuan.cn\/ssd8-ex3-java-rmi-4-the-conference-database-tables.html\" target=\"_blank\">SSD8_Ex3\u3010JAVA_RMI\u3011(4)\u4f1a\u8bae\u6570\u636e\u5e93\u5efa\u8868<\/a><\/p>\n<p style=\"text-align: left;\"><a href=\"http:\/\/wangbaiyuan.cn\/ssd8-ex3-java-rmi-5-the-database-connection-and-session-method-definition.html\" target=\"_blank\">SSD8_Ex3\u3010JAVA_RMI\u3011(5)\u6570\u636e\u5e93\u8fde\u63a5\u548c\u4f1a\u8bae\u65b9\u6cd5\u5b9a\u4e49<\/a><\/p>\n<p style=\"text-align: left;\"><a href=\"http:\/\/wangbaiyuan.cn\/java-rmi-6-making-the-command-line-navigation-menu.html\" target=\"_blank\">SSD8_Ex3\u3010JAVA_RMI\u3011(6)\u5236\u4f5c\u547d\u4ee4\u884c\u5bfc\u822a\u83dc\u5355<\/a><\/p>\n<p>&nbsp;<\/p>\n","protected":false},"excerpt":{"rendered":"RMI\u548c\u7f51\u7edcAPI \u5468\u672b\u505a\u4e86\u7f51\u7edc\u4e0e\u5206\u5e03\u5f0f\u7cfb\u7edf\u5b9e\u9a8c\u7684EX3-java\u5b9e\u73b0RMI\u5206\u5e03\u5f0f\u8bae\u7a0b\u670d\u52a1\u3002RMI\u7684\u5168\u79f0\u662f\u201c\u8fdc\u7a0b\u65b9\u6cd5\u8c03\u7528 (Remote Method Invocation)\u201d\u3002\u4e0b\u9762\u662f\u6781\u5ba2\u4eba\u7684\u7406\u89e3\uff1a\u4f7f\u7528RMI\u8fdc\u7a0b\u65b9\u6cd5\u8c03\u7528\uff0c\u53ef\u4ee5\u5b9e\u73b0\u4e00\u4e2ajava\u5ba2\u6237\u7aef\u5bf9java RMI\u7684\u670d\u52a1\u7aef\u8fdb\u884c\u8fdc\u7a0b\u8c03\u7528\u5bf9\u65b9\u7684\u65b9\u6cd5\uff0c\u8fd9\u4e9b\u65b9\u6cd5\u5728\u670d\u52a1\u5668\u7aef\u8fdb\u884c\u4e86\u58f0\u660e\u5e76\u5177\u4f53\u5b9e\u73b0\uff0c\u800c\u5ba2\u6237\u7aef\u4e2d\u53ea\u6709\u8fd9\u4e9b\u65b9\u6cd5\u7684\u5b9a\u4e49\u800c\u6ca1\u6709\u65b9\u6cd5\u7684\u5185\u5bb9\u5b9e\u73b0\u2014\u2014\u5373\u4e00\u4e2aJA<a rel=\"nofollow\" class=\"more-link\" style=\"text-decoration:none;\" href=\"http:\/\/wangbaiyuan.cn\/ssd8-ex3-java-rmi-services-1-an-overview-of-rmi-and-web-api.html\"><\/a>","protected":false},"author":1,"featured_media":0,"comment_status":"open","ping_status":"open","sticky":false,"template":"","format":"standard","meta":[],"categories":[6],"tags":[22,99,102,81,101],"_links":{"self":[{"href":"http:\/\/wangbaiyuan.cn\/wp-json\/wp\/v2\/posts\/1262"}],"collection":[{"href":"http:\/\/wangbaiyuan.cn\/wp-json\/wp\/v2\/posts"}],"about":[{"href":"http:\/\/wangbaiyuan.cn\/wp-json\/wp\/v2\/types\/post"}],"author":[{"embeddable":true,"href":"http:\/\/wangbaiyuan.cn\/wp-json\/wp\/v2\/users\/1"}],"replies":[{"embeddable":true,"href":"http:\/\/wangbaiyuan.cn\/wp-json\/wp\/v2\/comments?post=1262"}],"version-history":[{"href":"http:\/\/wangbaiyuan.cn\/wp-json\/wp\/v2\/posts\/1262\/revisions"}],"wp:attachment":[{"href":"http:\/\/wangbaiyuan.cn\/wp-json\/wp\/v2\/media?parent=1262"}],"wp:term":[{"taxonomy":"category","embeddable":true,"href":"http:\/\/wangbaiyuan.cn\/wp-json\/wp\/v2\/categories?post=1262"},{"taxonomy":"post_tag","embeddable":true,"href":"http:\/\/wangbaiyuan.cn\/wp-json\/wp\/v2\/tags?post=1262"}],"curies":[{"name":"wp","href":"https:\/\/api.w.org\/{rel}","templated":true}]}}
+
+
+"Android应用在运行之中会产生一些数据，比如图片的缓存，数据库文件，配置文件等等。我们开发时可能会有这样的一个需求清除应用内缓存的数据，可以让用户选择删除应用内产生的数据，这也是比较人性化的设计点。过多的缓存会占用手机的存储空间，据说也会降低手机的IO性能。 下面这是简书Android APP中提供了清除缓存的设计：
+ <div class="image-package">
+ 
+ <img src="http://wangbaiyuan.cn/wp-content/uploads/2017/02/20170223133730116.jpg" alt="简书清除缓存" width="408" height="256" />
+ <div class="image-caption"></div>
+ </div>
+ <blockquote>那么Android应用在运行中会产生哪些数据呢？它们都被存放在哪里？然后我们根据产生数据的位置实现清除功能</blockquote>
+ <h2>首先简单讲讲Android的四种数据存储方式</h2>
+ <h3>1、SharePreferenc</h3>
+ 一种轻型的数据存储方式，实际上是基于XML文件存储的“key-value”键值对数据；通常用来存储程序的一些配置信息。
+ <h4>SharePreference的存储目录：</h4>
+ <strong>其存储在“data/data/程序包名/shared_prefs目录下。</strong>
+ <h4>SharePreference修改和存储数据</h4>
+ <ul>
+ <li>根据Context的getSharedPrerences(key, [模式])方法获取SharedPreference对象；</li>
+ <li>利用SharedPreference的editor()方法获取Editor对象；</li>
+ <li>通过Editor的putXXX()方法，将键值对存储数据；</li>
+ <li>通过Editor的commit()方法将数据提交到SharedPreference内</li>
+ </ul>
+ <h3>2、SQLite</h3>
+ SQLite是一个轻量级关系型数据库，既然是关系型数据库，那操作起来其实跟mysql、sql server差不多的。
+ <blockquote>Android提供了强大数据库管理库，同时也支持运行哦原生命令，实现数据库的增删改查</blockquote>
+ <h3>3、 File</h3>
+ <blockquote>Android中可以在设备本身的存储设备或外接的存储设备中创建用于保存数据的文件。在默认状态下，文件是不能在不同程序间共享的。</blockquote>
+ File可以通过FileInputStream和FileOutputStream对文件进行操作。
+ <h3>4、ContentProvider</h3>
+ ContentProvider相对于其它的方式比较复杂，当然其功能相对于其它的方式也是革命性的改变。它能够实现跨应用之间的数据操作。利用ContentResolver对象的delete、update、insert、query等方法去操ContentProvider的对象，让ContentProvider对象的方法去对数据操作。
+ <h4>实现方式为：</h4>
+ <ul>
+ <li>在A程序中定义一个ContentProvider，重载其增删查改等方法；</li>
+ <li>在A程序中的AndroidManifest.xml中注册ContentProvider；</li>
+ <li>在B程序中通过ContentResolver和Uri来获取ContentProvider的数据，同样利用Resolver的增删查改方法来获得和处理数据</li>
+ </ul>
+ <h2>Android应用的数据存储路径</h2>
+ 应用内数据的所有路径和对应的数据清除代码：
+ <ul>
+ <li><strong>/data/data/com.xxx.xxx/cache</strong> - 应用内缓存（注：对应方法<strong>getCacheDir() </strong>）
+ <pre class="lang:default decode:true "> public static void cleanInternalCache(Context context) {
+ deleteFilesByDirectory(context.getCacheDir());
+ }</pre>
+ &nbsp;</li>
+ <li><strong>/data/data/com.xxx.xxx/databases</strong> - 应用内数据库
+ <pre class="lang:default decode:true "> public static void cleanDatabases(Context context) {
+ deleteFilesByDirectory(new File("/data/data/"
+ + context.getPackageName() + "/databases"));
+ }</pre>
+ &nbsp;</li>
+ <li><strong>/data/data/com.xxx.xxx/shared_prefs</strong> - 应用内配置文件</li>
+ </ul>
+ <pre class="lang:default decode:true "> public static void cleanSharedPreference(Context context) {
+ deleteFilesByDirectory(new File("/data/data/"
+ + context.getPackageName() + "/shared_prefs"));
+ }</pre>
+ &nbsp;
+ <ul>
+ <li><strong>/data/data/com.xxx.xxx/files</strong> - 应用内文件（注：对应方法getFilesDir())</li>
+ </ul>
+ <pre class="lang:default decode:true "> public static void cleanFiles(Context context) {
+ deleteFilesByDirectory(context.getFilesDir());
+ }</pre>
+ &nbsp;
+ 
+ 由于Android应用数据存储的权限比较宽泛，一个Android应用几乎可以在SD卡任意位置创建一个目录和文件，所以上面的几个存储路径只是Android应用最基本的存储路径。更多的清除代码实现在下面的清除工具类中将于更详细的讲解
+ <h3>清除工具类的代码实现</h3>
+ 为了方便使用，下面时我封装好的数据清除工具类：
+ <pre class="lang:default decode:true ">package cn.wangbaiyuan.utils;
+ 
+ /**
+ * Created by BrainWang on 2017-02-21.
+ */
+ import java.io.File;
+ import java.io.IOException;
+ import java.math.BigDecimal;
+ import android.content.Context;
+ import android.os.Environment;
+ 
+ /**
+ * 清除缓存
+ *
+ */
+ public class CleanDataUtil {
+ 
+ 
+ /** * 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) * * @param context */
+ public static void cleanInternalCache(Context context) {
+ deleteFilesByDirectory(context.getCacheDir());
+ }
+ 
+ /** * 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) * * @param context */
+ public static void cleanDatabases(Context context) {
+ deleteFilesByDirectory(new File("/data/data/"
+ + context.getPackageName() + "/databases"));
+ }
+ 
+ /**
+ * * 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) * * @param
+ * context
+ */
+ public static void cleanSharedPreference(Context context) {
+ deleteFilesByDirectory(new File("/data/data/"
+ + context.getPackageName() + "/shared_prefs"));
+ }
+ 
+ /** * 按名字清除本应用数据库 * * @param context * @param dbName */
+ public static void cleanDatabaseByName(Context context, String dbName) {
+ context.deleteDatabase(dbName);
+ }
+ 
+ /** * 清除/data/data/com.xxx.xxx/files下的内容 * * @param context */
+ public static void cleanFiles(Context context) {
+ deleteFilesByDirectory(context.getFilesDir());
+ }
+ 
+ /**
+ * * 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache) * * @param
+ * context
+ */
+ public static void cleanExternalCache(Context context) {
+ if (Environment.getExternalStorageState().equals(
+ Environment.MEDIA_MOUNTED)) {
+ deleteFilesByDirectory(context.getExternalCacheDir());
+ }
+ }
+ 
+ /** * 清除自定义路径下的文件，使用需小心，请不要误删。而且只支持目录下的文件删除 * * @param filePath */
+ public static void cleanCustomCache(String filePath) {
+ deleteFilesByDirectory(new File(filePath));
+ }
+ 
+ /** * 清除本应用所有的数据 * * @param context * @param filepath */
+ public static void cleanApplicationData(Context context, String... filepath) {
+ cleanInternalCache(context);
+ cleanExternalCache(context);
+ cleanDatabases(context);
+ cleanSharedPreference(context);
+ cleanFiles(context);
+ for (String filePath : filepath) {
+ cleanCustomCache(filePath);
+ }
+ }
+ 
+ /** * 删除方法 这里只会删除某个文件夹下的文件，如果传入的directory是个文件，将不做处理 * * @param directory */
+ private static void deleteFilesByDirectory(File directory) {
+ if (directory != null &amp;&amp; directory.exists() &amp;&amp; directory.isDirectory()) {
+ for (File item : directory.listFiles()) {
+ item.delete();
+ }
+ }
+ }
+ 
+ /**
+ * 清除所有缓存，相当于设置里应用管理中的“清除数据”，清除数据时应用将会退出
+ * @param context
+ */
+ public static void clearAppUserData(Context context) {
+ try {
+ Runtime.getRuntime().exec("pm clear " + context.getPackageName());
+ } catch (IOException e) {
+ e.printStackTrace();
+ }
+ }
+ 
+ }</pre>
+ &nbsp;
+ <h2>系统设置应用管理的”清除数据“的实现方法</h2>
+ 在Android系统设置的应用管理中，提供了”清除数据“的功能，这一功能对应用数据的清除更加彻底，我们可以在代码中实现类似的需求，不过下面代码的执行将使应用退出：
+ <pre class="lang:default decode:true "> /**
+ * 清除所有缓存，相当于设置里应用管理中的“清除数据”，清除数据时应用将会退出
+ * @param context
+ */
+ public static void clearAppUserData(Context context) {
+ try {
+ Runtime.getRuntime().exec("pm clear " + context.getPackageName());
+ } catch (IOException e) {
+ e.printStackTrace();
+ }
+ }</pre>
+ &nbsp;"
+ 
+ 
+
+文章列表：
+
+

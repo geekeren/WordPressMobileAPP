@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.wangbaiyuan.blog">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
+        android:name=".BlogApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".module.main.MainActivity"
+            android:theme="@style/AppTheme.NoTitle"></activity>
+        <activity
+            android:name=".module.post.SinglePostActivity"
+            android:parentActivityName=".module.post.SinglePostActivity"
+            android:theme="@style/AppSwipeBackTheme">
+            <intent-filter>
+                <data android:scheme="wbyblog" android:host="wangbaiyuan.cn"
+                    android:pathPrefix="/post"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.post.ShuoShuoActivity"
+            android:label="@string/title_activity_shuoshuo"
+            android:theme="@style/AppSwipeBackTheme"></activity>
+
+        <activity android:name="cn.wangbaiyuan.blog.module.user.LoginActivity"
+            android:label="@string/title_activity_login">
+
+        </activity>
+        <activity
+            android:name=".module.splash.SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+    </application>
+
+</manifest>

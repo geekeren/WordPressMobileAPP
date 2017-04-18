@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion Integer.parseInt(project.AndroidCompileSDKVersion)
+    buildToolsVersion project.AndroidBuildToolsVersion
+    defaultConfig {
+
+        minSdkVersion 18
+        targetSdkVersion Integer.parseInt(project.AndroidTargetVersion)
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:'+project.AndroidSupportLibVersion
+    compile 'com.android.support:support-v4:'+project.AndroidSupportLibVersion
+    compile 'com.joanzapata.android:base-adapter-helper:1.1.11'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+}

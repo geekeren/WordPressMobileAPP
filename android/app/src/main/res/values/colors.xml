@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1576a9</color>
+    <color name="colorPrimaryDark">#134e86</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="colorTabUnPressed">#e9e9e9</color>
+    <color name="colorTabPressed">#dddddd</color>
+    <color name="colorTabTextSelected">#0e2738</color>
+    <color name="colorTabTextUnSelected">#44758f</color>
+    <color name="colorShuoShuoMain">#123555</color>
+</resources>

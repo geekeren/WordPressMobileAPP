@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d4d3d3" />
+
+    <cn.wangbaiyuan.aar.commonView.widget.IconTextView
+        android:id="@+id/imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="3dp"
+        android:gravity="center_horizontal"
+        android:textColor="@drawable/tab_text_color"
+        android:text="@string/icon_user"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:focusable="true"
+        android:textColor="@drawable/tab_text_color"
+        android:textSize="10dp"
+        android:text="首页"/>
+
+</LinearLayout>

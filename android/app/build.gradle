@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion Integer.parseInt(project.AndroidCompileSDKVersion)
+    buildToolsVersion project.AndroidBuildToolsVersion
+    defaultConfig {
+        applicationId "cn.wangbaiyuan.byblog"
+        minSdkVersion Integer.parseInt(project.AndroidMinSDKVersion)
+        targetSdkVersion Integer.parseInt(project.AndroidTargetVersion)
+        versionCode 4
+        versionName "1.5"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+             //   abiFilters "armeabi-v7a", "x86"
+             //   abiFilters "armeabi", "armeabi-v7a", "x86"
+                cppFlags ""
+            }
+        }
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+
+    }
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.0'
+    }
+
+    def enableSeparateBuildPerCPUArchitecture = false
+    def enableProguardInReleaseBuilds = false
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false  // If true, also generate a universal APK
+            include "armeabi-v7a", "x86"
+        }
+    }
+
+    signingConfigs {
+
+        release {
+            keyAlias "byblog"
+            keyPassword "hmvq1191994"
+            storeFile file("E:\\Android\\密钥\\byblog.jks")
+            storePassword "hmvq1191994"
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+          def versionCodes = ["armeabi-v7a":1, "x86":2]
+            def abi = output.getFilter(com.android.build.OutputFile.ABI)
+            if (abi != null) {  // null for the universal-debug, universal-release variants
+                output.versionCodeOverride =
+                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+            }
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile project(path: ':ByAar')
+    compile project(':SlideMenu')
+    compile 'com.android.support:appcompat-v7:'+project.AndroidSupportLibVersion
+    compile 'com.android.support:support-v4:'+project.AndroidSupportLibVersion
+    compile 'com.android.support:design:'+project.AndroidSupportLibVersion
+    testCompile 'junit:junit:4.12'
+    compile project(':share')
+}
+task copyDownloadableDepsToLibs(type: Copy) {
+    from configurations.compile
+    into 'libs'
+}

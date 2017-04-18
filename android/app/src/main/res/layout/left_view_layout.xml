@@ -1,0 +1,114 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sidebar_bg"
+   >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/leftside_cover_bg">
+
+    </View>
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="70dp"
+        android:paddingLeft="30dp">
+        <!--头像，昵称信息-->
+        <LinearLayout
+            android:id="@+id/user_info_container"
+            android:focusable="true"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.chinaztt.widget.RoundAngleImageView
+                android:id="@+id/iv_bottom"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_logo"
+                app:roundHeight="25dp"
+                app:roundWidth="25dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text="点击登录"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                    <ImageButton
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="100dp"
+                        android:background="@drawable/qrcode_selector" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/sidebar_signature_nor" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="博学广问，自律静思"
+                android:textColor="#676767"
+                android:textSize="15dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--底部功能条-->
+    <include
+        android:id="@+id/bottom_view"
+        layout="@layout/left_view_bottom_layout" />
+    <!--中间列表-->
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_view"
+        android:layout_below="@id/ll1"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="70dp"
+        android:cacheColorHint="#00000000"
+        android:divider="@null"
+        android:listSelector="@drawable/lv_click_selector"
+        android:scrollbars="none"
+        android:textColor="#ffffff" />
+</RelativeLayout>
