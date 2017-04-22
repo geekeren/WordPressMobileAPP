@@ -42,9 +42,9 @@ android {
 
         release {
             keyAlias "byblog"
-            keyPassword "hmvq1191994"
+            keyPassword "xxx"
             storeFile file("E:\\Android\\密钥\\byblog.jks")
-            storePassword "hmvq1191994"
+            storePassword "xxx"
         }
     }
 
