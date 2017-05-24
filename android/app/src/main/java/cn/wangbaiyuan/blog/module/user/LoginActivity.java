@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -32,7 +33,7 @@ public class LoginActivity extends CommonActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ReactInstanceManager.Builder mReactInstanceBuilder = ReactNativeMgr.getReactInstanceBuilder(getApplication());
+        ReactInstanceManagerBuilder mReactInstanceBuilder = ReactNativeMgr.getReactInstanceBuilder(getApplication());
         mReactInstanceBuilder.addPackage(new ReactPackage() {
             public LoginActivity.LoginModule loginModule;
 

@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -56,7 +57,7 @@ public class ShuoShuoActivity extends CommonActionBarActivity {
         setContentView(R.layout.activity_shuoshuo);
         //setSwipeBackEnable(true);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        ReactInstanceManager.Builder mReactInstanceBuilder = ReactNativeMgr.getReactInstanceBuilder(getApplication());
+        ReactInstanceManagerBuilder mReactInstanceBuilder = ReactNativeMgr.getReactInstanceBuilder(getApplication());
         mReactInstanceBuilder.addPackage(new ReactPackage() {
             public ShuoShuoModule shuoShuoModule;
 

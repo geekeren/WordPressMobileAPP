@@ -20,7 +20,8 @@ import {
 
 var { height, width } = Dimensions.get('window')
 var TimeUtil = require("./Utils/Time")
-
+var WPAPI = require( 'wpapi' );
+var wp = new WPAPI({ endpoint: 'http://wangbaiyuan.cn/wp-json' });
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -37,7 +38,7 @@ class Home extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.fetchData();
     }
 
@@ -46,15 +47,15 @@ class Home extends Component {
     }
 
     fetchData() {
+
         this.setState({
             foot: 2
         });
-        REQUEST_URL = 'http://wangbaiyuan.cn/wp-json/wp/v2/posts?context=embed' + "&page=" + this.state.pageNum;
-        var err = false;
-        fetch(REQUEST_URL)
-            .then((response) => response.json())
-            .then((responseData) => {
-                console.log(REQUEST_URL);
+
+        //var thiz = this;
+        wp.posts().embed().perPage(10).page(this.state.pageNum)
+            .then(function( responseData ) {
+                //console.log(responseData);
                 var j = responseData.length;
                 if (j == 0) {
                     this.state.pageTotalNum = this.state.pageNum;
@@ -68,11 +69,37 @@ class Home extends Component {
                     foot: 1,
                     error: false
                 });
-            }).catch((e) => {
-                this.setState({
-                    error: true
-                })
-            }).done();
+        }.bind(this)).catch(function( err ) {
+            this.setState({
+                error: true
+            })
+        }.bind(this));
+
+        // REQUEST_URL = 'http://wangbaiyuan.cn/wp-json/wp/v2/posts?context=embed' + "&page=" + this.state.pageNum;
+        // var err = false;
+        // fetch(REQUEST_URL)
+        //     .then((response) => response.json())
+        //     .then((responseData) => {
+        //         console.log(REQUEST_URL);
+        //         var j = responseData.length;
+        //         if (j == 0) {
+        //             this.state.pageTotalNum = this.state.pageNum;
+        //         }
+        //         for (var i = 0; i < j; i++) {
+        //             this.state.totalList.push(responseData[i]);
+        //         }
+        //         this.setState({
+        //             dataSource: this.state.dataSource.cloneWithRows(this.state.totalList),
+        //             loaded: true,
+        //             foot: 1,
+        //             error: false
+        //         });
+        //     }).catch((e) => {
+        //         this.setState({
+        //             error: true
+        //         })
+        //     })
+        //     .done();
         // this.state.error=err;
 
 
@@ -135,7 +162,6 @@ class Home extends Component {
         postArray["link"] = post.link
         postArray["excerpt"] = post.excerpt.rendered
         NativeModules.NativeModule.openUriWithExtras(post._links.self[0].href, postArray)
-        console.log("pressed")
     }
     renderPost(post) {
         var thumb;

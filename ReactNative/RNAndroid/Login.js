@@ -18,8 +18,12 @@ import {
     AsyncStorage
 } from 'react-native';
 var Buffer = require('buffer').Buffer
-import WPAPI from 'wpapi'
-var wp = new WPAPI({ endpoint: 'http://src.wordpress-develop.dev/wp-json' });
+var WPAPI = require('wpapi');
+
+const wp = new WPAPI({
+    endpoint: 'http://wangbaiyuan.cn/wp-json'
+});
+
 class Login extends Component {
 
     constructor(props) {
@@ -32,12 +36,57 @@ class Login extends Component {
     }
 
     login() {
+        console.log("login")
+        AsyncStorage.getItem("login_nonce" , (error, result)=> {
+            if (error) {
+                ToastAndroid.show(error.message, ToastAndroid.SHORT);
+            }else{
+                if (result == null) {
+
+                } else {
+                    require('wpapi').site('http://wangbaiyuan.cn/wp-json').auth({
+                        nonce: result
+                    }).users().me().then(function (user) {
+                        ToastAndroid.show(user.name+"", ToastAndroid.LONG);
+                    }).catch((e)=> {
+                        ToastAndroid.show(e.message, ToastAndroid.LONG);
+                    });
+                }
+            }
+        });
+
+
         var loginParams = {action: "appajaxlogin", userName: this.state.userName, password: this.state.password,}
         let formData = new FormData();
         formData.append("action", "appajaxlogin");
         formData.append("userName", this.state.userName);
         formData.append("password", this.state.password);
-        formData.append("remember",true);
+        formData.append("remember", true);
+
+
+        fetch("http://wangbaiyuan.cn/wp-admin/admin-ajax.php", {
+            method: 'POST',
+            headers: {},
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                    if (json.loggedin == 1) {
+                        ToastAndroid.show("登录成功", ToastAndroid.SHORT);
+                        AsyncStorage.setItem("login_nonce", json.nonce, (error, result)=> {
+                            if (error) {
+                                ToastAndroid.show(error.message, ToastAndroid.SHORT);
+                            }
+                        });
+                    }
+
+
+                    else
+                        ToastAndroid.show("登录失败：" + json.error, ToastAndroid.SHORT);
+                }
+            ).catch((error) => {
+            ToastAndroid.show(error.message, ToastAndroid.SHORT);
+        });
 
     }
 

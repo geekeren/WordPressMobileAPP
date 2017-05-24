@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.BuildConfig;
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
@@ -28,10 +29,10 @@ public class ReactNativeMgr extends BaseMgr {
         return reacNativeMgr;
     }
 
-    public static ReactInstanceManager.Builder getReactInstanceBuilder(Application application) {
+    public static ReactInstanceManagerBuilder getReactInstanceBuilder(Application application) {
 
 
-        ReactInstanceManager.Builder reacNativeMgrBuilder = ReactInstanceManager.builder()
+        ReactInstanceManagerBuilder reacNativeMgrBuilder = ReactInstanceManager.builder()
                     .setApplication(application)
                     .setBundleAssetName("index.android.js")
                     .setJSMainModuleName("index.android")

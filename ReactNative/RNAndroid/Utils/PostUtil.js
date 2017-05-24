@@ -178,7 +178,7 @@ function renderPost(postcontent) {
             </html>
                 `;
 
-   // var elementNames=["content","title","time","category"];
+    // var elementNames=["content","title","time","category"];
     var reg = new RegExp("{{content}}", "g"); //创建正则RegExp对象  
     var renderedStr = template.replace(reg, post_html_decode(postcontent.content.rendered));
     reg = new RegExp("{{title}}", "g"); //创建正则RegExp对象  
@@ -189,9 +189,9 @@ function renderPost(postcontent) {
 
     reg = new RegExp("{{category}}", "g"); //创建正则RegExp对象  
     renderedStr = renderedStr.replace(reg, (postcontent.category));
-    
+
     //renderedStr = 
-    console.log(renderedStr)
+    // console.log(renderedStr)
     return renderedStr;
 
 }
@@ -218,7 +218,7 @@ function post_html_decode(s) {
             s = s.replace(pres[i], pre);
         }
 
-    console.log(s);
+    //console.log(s);
     return s;
 }
 var PostRender = renderPost

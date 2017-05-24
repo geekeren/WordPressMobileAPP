@@ -108,7 +108,7 @@
         android:layout_marginTop="70dp"
         android:cacheColorHint="#00000000"
         android:divider="@null"
-        android:listSelector="@drawable/lv_click_selector"
+        android:listSelector="?android:attr/selectableItemBackground"
         android:scrollbars="none"
         android:textColor="#ffffff" />
 </RelativeLayout>

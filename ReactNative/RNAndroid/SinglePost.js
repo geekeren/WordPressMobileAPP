@@ -2,7 +2,7 @@
  * Created by BrainWang on 2017-02-27.
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     AppRegistry,
     StyleSheet,
@@ -15,10 +15,13 @@ import {
     Touchable,
     TouchableHighlight,
     NativeModules,
-    WebView
+    WebView,
+    Alert
 } from 'react-native';
 
 var PostRender = require('./Utils/PostUtil')
+var WPAPI = require('wpapi');
+const wp = new WPAPI({endpoint: 'http://wangbaiyuan.cn/wp-json'});
 
 class SinglePost extends Component {
 
@@ -27,58 +30,63 @@ class SinglePost extends Component {
         this.state = {
             loaded: 0,
             error: false,
-            postData: new Object(),
+            postData:null,
         };
 
     }
-    componentDidMount() {
+
+
+    componentWillMount() {
         this.fetch_data();
 
     }
 
     fetch_data() {
-        fetch(this.props.restLink)
-            .then((Response) => (Response.json()))
-            .then((post) => {
-                this.setState({
-                    postData: post,
-                    error: false,
-                    loaded: 1
-                });
-                console.log(this.state.title)
-                console.log(post.title.rendered)
 
-            }).catch((e) => {
-                this.setState({
+        var thiz = this;
+        wp.posts().id(this.props.id)
+            .then((post) => {
+                thiz.setState({
+                    loaded: 1,
+                    error: false,
+                    postData: post
+            }) }).catch((e) => {
+                thiz.setState({
                     error: true
-                })
-            }).done();
+                });
+            }
+        );
 
     }
+
     render() {
-        if (this.state.loaded === 0 && !(this.state.error)) {
+        const { loaded, error, postData } = this.state;
+        // Diagnostics: are we rendering?
+        console.log('render is called');
+        // Diagnostics: is the state object populated?
+        console.log(loaded, error, postData);
 
-            return (<View style={styles.loading}>
-                <Image style={{ width: 40, height: 40 }} source={{ uri: 'ajax_loader' }} /><Text style={{ color: '#666666', fontSize: 15 }}>文章加载中</Text>
-            </View>)
-        } else if (this.state.error) {
-            return (<View style={styles.loading}>
-                <Image style={{ width: 40, height: 40 }} source={{ uri: 'reload' }} /><Text style={{ color: '#666666', fontSize: 15 }}>错误</Text>
-            </View>)
-        }
-        else {
-            return (
-
-                <WebView style={{
-                    height: 500,
-                }}
-                    source={{ html: PostRender(this.state.postData) }} />
-            )
+        // Simple case: postData is available
+        if (postData) {
+            return (<WebView
+                style={{height: 500,}}
+                source={{html: PostRender(this.state.postData)}}
+            />);
         }
 
-        // var HTML =
-        // console.log(HTML)
+        // Error state
+        if (error) {
+            return (<View style={styles.loading}>
+                <Image style={{width: 40, height: 40}} source={{uri: 'reload'}}/>
+                <Text style={{color: '#666666', fontSize: 15}}>错误</Text>
+            </View>);
+        }
 
+        // If no error and no post data, then we're loading
+        return (<View style={styles.loading}>
+            <Image style={{width: 40, height: 40}} source={{uri: 'ajax_loader'}}/>
+            <Text style={{color: '#666666', fontSize: 15}}>加载中 </Text>
+        </View>);
     }
 
 

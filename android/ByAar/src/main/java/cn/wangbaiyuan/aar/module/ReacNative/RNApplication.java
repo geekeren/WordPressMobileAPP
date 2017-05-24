@@ -1,9 +1,11 @@
 package cn.wangbaiyuan.aar.module.ReacNative;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +23,11 @@ public abstract class RNApplication extends BaseApplication implements ReactAppl
     public static MyReactPackage getMyReactPackage() {
         return myReactPackage;
     }
-
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        SoLoader.init(this, /* native exopackage */ false);
+    }
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {

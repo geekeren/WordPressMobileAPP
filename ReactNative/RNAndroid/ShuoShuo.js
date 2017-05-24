@@ -46,13 +46,14 @@ class ShuoShuo extends Component {
         this.setState({
             foot: 2
         });
-        REQUEST_URL = 'http://wangbaiyuan.cn/wp-json/wp/v2/shuoshuo' + "?page=" + this.state.pageNum;
-        fetch(REQUEST_URL)
-            .then((response) => response.json())
-            .then((responseData) => {
-                console.log(REQUEST_URL);
+        var WPAPI = require("wpapi");
+        var wp = new WPAPI({ endpoint: 'http://wangbaiyuan.cn/wp-json' });
+        wp.shuoshuo = wp.registerRoute( 'wp/v2', '/shuoshuo/(?P<id>[\d]+)' );
+        //site.shuoshuo().id( 17 ); // => myplugin/v1/author/17
+        wp.shuoshuo().perPage(10).page(this.state.pageNum)
+            .then(function( responseData ) {
+                console.log(responseData);
                 var j = responseData.length;
-
                 if (j == 0) {
                     this.state.pageTotalNum = this.state.pageNum;
                 }
@@ -62,18 +63,17 @@ class ShuoShuo extends Component {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(this.state.totalList),
                     loaded: true,
-                    foot: 1
+                    foot: 1,
+                    error: false
                 });
-            }).catch(function (e) {
-                console.log(e);
-            }).done();
+            }.bind(this)).catch(function( err ) {
+            this.setState({
+                error: true
+            })
+        }.bind(this));
     }
 
     render() {
-        // if (!this.state.loaded) {
-        //     return this.renderLoadingView();
-        // }
-
         return (
 
             <ListView

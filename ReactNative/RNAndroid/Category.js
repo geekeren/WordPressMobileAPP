@@ -21,7 +21,7 @@ import {
 
 class Category extends Component {
    render(){
-       
+       <View></View>
    }
 
 
